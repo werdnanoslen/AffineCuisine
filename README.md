@@ -4,7 +4,7 @@ AffineCuisine
 Find the affinities in your kitchen
 
 ## Backend
-1. Fetch ingredients from [Wikibooks' Category:Ingredients](https://en.wikibooks.org/w/api.php?format=json&action=query&list=categorymembers&cmtitle=Category:Ingredients)
+1. ~~Fetch ingredients from [Wikibooks' Category:Ingredients](https://en.wikibooks.org/w/api.php?format=json&action=query&list=categorymembers&cmtitle=Category:Ingredients)~~
 2. Build list from ingredients
 3. Seed weighted adjacency matrix for ingredients list
     * getAllIngredients() = {ingredient1, ..., ingredientN};
