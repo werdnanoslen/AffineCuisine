@@ -6,6 +6,7 @@ angular.module('AffineCuisine.services', [])
     var functions = {
         // fetch all ingredients
         all: function() {
+            return recall();
             function recall(previous, cmcontinue, deferred) {
                 if (typeof(deferred) === "undefined") {
                     deferred = $q.defer();
@@ -18,6 +19,7 @@ angular.module('AffineCuisine.services', [])
                 }
                 $http.jsonp(apiUrl + "&cmcontinue=" + cmcontinue)
                 .success(function(data, status) {
+                    deferred.notify("Fetching ingredients");
                     var categorymembers = previous.concat(data.query.categorymembers);
                     var queryContinue = data['query-continue'];
                     if (queryContinue) {
@@ -36,26 +38,6 @@ angular.module('AffineCuisine.services', [])
                 });
                 return deferred.promise;
             }
-
-            var promise = recall();
-            promise.then(
-                function(api) {
-                    var ingredients = {'_length': 0};
-                    for(var index in api.categorymembers) {
-                        var ingredient = api.categorymembers[index];
-                        if (ingredient.hasOwnProperty('title')) {
-                            ingredient.title = ingredient.title.replace('Cookbook:', '');
-                            ingredients[ingredient.title] = ingredient;
-                            ++ingredients._length;
-                        }
-                    }
-                    console.log(api.status + ' on IngredientService.all(): ', ingredients);
-                    return ingredients;
-                },
-                function(reason) {
-                    console.log(reason);
-                }
-            );
         }
     };
     return functions;
