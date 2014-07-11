@@ -28,5 +28,18 @@ angular.module('AffineCuisine.controllers', [])
             $ionicLoading.hide();
             $scope.ingredients = undefined;
         }
-    )
+    );
+
+    IngredientService.ingredient('Cookbook:Hamburger').then(
+        function(info) {
+            console.log(info.status + ' on IngredientService.ingredient(): ', info.info);
+            $ionicLoading.hide();
+            $scope.info = info;
+        },
+        function(reason) {
+            console.log(reason);
+            $ionicLoading.hide();
+            $scope.info = undefined;
+        }
+    );
 })
